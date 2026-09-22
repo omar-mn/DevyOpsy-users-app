@@ -5,7 +5,7 @@ from django.views.decorators.cache import cache_page
 from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from .models import account
+from .models import user
 from .serializers import Profile
 
 
@@ -15,14 +15,9 @@ from .serializers import Profile
 def GetProfile(request , pk):
 
     try:
-        user = account.objects.get(pk = pk)
-    except account.DoesNotExist:
+        user = user.objects.get(pk = pk)
+    except user.DoesNotExist:
         return Response({"message" : "this user doesn't exist"} , status=status.HTTP_404_NOT_FOUND)
     
     serializer = Profile(user)
     return Response(serializer.data)
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def healthcheck(request):
-    return (Response({"لا داعي للسيطرة الامور تحت القلق  /  بتيست الوورك فلوو / للمرة ال ؟؟؟"}))

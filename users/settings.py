@@ -119,7 +119,7 @@ CELERY_RESULT_BACKEND = "redis://redis-svc:6379/1"
 
 #custom user model
 
-AUTH_USER_MODEL = 'users_app.account'
+AUTH_USER_MODEL = 'users_app.user'
 
 
 #SIMPLE JWT AUTH
@@ -175,11 +175,6 @@ REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'users_app.serializers.CustomUserDetailsSerializer',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  
-ACCOUNT_EMAIL_REQUIRED = True           
-ACCOUNT_UNIQUE_EMAIL = True
-SITE_ID = 2
 
 # EMAIL_BACKEND                       = 'django.core.mail.backends.console.EmailBackend'
 # ACCOUNT_AUTHENTICATION_METHOD       = 'email'  
@@ -233,12 +228,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static')
+# ]
 
-MEDIA_URL = 'media/'
+# MEDIA_URL = 'media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR , 'media')

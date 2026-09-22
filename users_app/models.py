@@ -36,27 +36,15 @@ class UserManager(BaseUserManager):
         return user
 
 
-#image get
-def getProfileImageFilepath(self,filename):
-    return f'users/profileImages/{self.pk}/{"profileImage.png"}'
-
-def getProfileBannerFilepath(self,filename):
-    return f'users/profileBanner/{self.pk}/{"profileImage.png"}'
-
-
 # REG USER
 
-class account(ExportModelOperationsMixin('account'), AbstractBaseUser):
+class user(ExportModelOperationsMixin('user'), AbstractBaseUser):
     
     #main-fields
     email                    = models.EmailField(max_length=60 , unique=True , blank=False , null=False)
     username                 = models.CharField( max_length=20 , unique=True , blank=False , null=False)
     first_name               = models.CharField(max_length=20 , null=True , blank=True)
     last_name                = models.CharField(max_length=20 , null=True , blank=True)
-
-    #extra-fields
-    profileImage             = models.ImageField(upload_to=getProfileImageFilepath,max_length=255 , null=True , blank=True , default='main.png')
-    profile_banner           = models.ImageField(upload_to=getProfileBannerFilepath,max_length=255 , null=True , blank=True , default='main2.png')
     bio                      = models.CharField(max_length=500 , null=True , blank=True , default="hmmmmmmmmmmmmmmmmmm............")
 
     #other-fields
@@ -66,14 +54,10 @@ class account(ExportModelOperationsMixin('account'), AbstractBaseUser):
     is_staff                 = models.BooleanField(default=False)
     dateJoined               = models.DateTimeField(auto_now_add=True)
     lastLogin                = models.DateTimeField(auto_now=True)
-    hideEmail                = models.BooleanField(default=True)
     objects                  = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-
-    def getProfileImageFilename(self):
-        return str(self.profileImage)[str(self.profileImage).index(f'profileImages/{self.pk}/'):]
 
     def __str__(self):
         return self.username
